@@ -12,6 +12,7 @@
  ****************************************************************/
 function getChannelName(channel) {
   // Your code here
+  return channel["name"];
 }
 
 /**************************************************************
@@ -21,6 +22,8 @@ function getChannelName(channel) {
  ****************************************************************/
 function numberOfVideos(channel) {
   // Your code here
+
+  return channel["videos"].length;
 }
 
 /**************************************************************
@@ -34,6 +37,7 @@ function numberOfVideos(channel) {
  ****************************************************************/
 function channelHasVideo(videoTitle, channel) {
   // Your code here
+  return channel["videos"].some((element) => element["title"] === videoTitle);
 }
 
 /**************************************************************
@@ -46,6 +50,8 @@ function channelHasVideo(videoTitle, channel) {
  ****************************************************************/
 function getChannelByName(channelName, channels) {
   // Your code here
+
+  return channels.find((element) => element["name"] === channelName);
 }
 
 /**************************************************************
@@ -58,6 +64,10 @@ function getChannelByName(channelName, channels) {
  ****************************************************************/
 function getChannelByVideoTitle(videoTitle, channels) {
   // Your code here
+
+  return channels.find(
+    (element) => element["name"]["videos"]["title"] === videoTitle
+  );
 }
 
 /**************************************************************
@@ -70,6 +80,10 @@ function getChannelByVideoTitle(videoTitle, channels) {
  ****************************************************************/
 function searchChannels(query, channels) {
   // Your code here
+  let ans = channels["name"].filter(
+    (element) => element["videos"]["title"] === query
+  );
+  return ans;
 }
 
 /**************************************************************
