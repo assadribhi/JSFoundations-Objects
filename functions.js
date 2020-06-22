@@ -65,8 +65,8 @@ function getChannelByName(channelName, channels) {
 function getChannelByVideoTitle(videoTitle, channels) {
   // Your code here
 
-  return channels.find(
-    (element) => element["name"]["videos"]["title"] === videoTitle
+  return channels.find((channel) =>
+    channel.videos.some((video) => video.title === videoTitle)
   );
 }
 
@@ -80,10 +80,10 @@ function getChannelByVideoTitle(videoTitle, channels) {
  ****************************************************************/
 function searchChannels(query, channels) {
   // Your code here
-  let ans = channels["name"].filter(
-    (element) => element["videos"]["title"] === query
+  return channels.filter(
+    (channel) =>
+      channel.name.includes(query) || channel.description.includes(query)
   );
-  return ans;
 }
 
 /**************************************************************
@@ -95,6 +95,10 @@ function searchChannels(query, channels) {
  ****************************************************************/
 function totalVideosDuration(channel) {
   // Your code here
+  return channel.videos.reduce(
+    (totalDuration, video) => totalDuration + video.duration,
+    0
+  );
 }
 
 /**************************************************************
@@ -107,6 +111,12 @@ function totalVideosDuration(channel) {
  ****************************************************************/
 function channelWithMostContent(channels) {
   // Your code here
+  let mostContentChannel = channels[0];
+  channels.forEach((channel) => {
+    if (totalVideosDuration(channel) > totalVideosDuration(mostContentChannel))
+      mostContentChannel = channel;
+  });
+  return mostContentChannel;
 }
 
 /**************************************************************
@@ -118,6 +128,13 @@ function channelWithMostContent(channels) {
  ****************************************************************/
 function longestChannelName(channels) {
   // Your code here
+  let channelWithLongestName = channels[0];
+  channels.forEach((channel) => {
+    if (channel.name.length > channelWithLongestName.name.length)
+      channelWithLongestName = channel;
+  });
+
+  return channelWithLongestName;
 }
 
 module.exports = {
